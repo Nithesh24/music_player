@@ -104,22 +104,40 @@ function App() {
     setPlayState(true);
   }
 
+  const audioLength = () =>{
+    let audio = document.querySelector("#audio");
+    return [audio.currentTime, audio.duration]
+  }
+
+  const audioSeek = (timeStamp) =>{
+    let audio = document.querySelector("#audio");
+    audio.currentTime = timeStamp;
+  }
   const openPlayer = () =>{
     setPage("player")
   }
+
   const openHome = () =>{
-    setPage("home")
+    let player = document.querySelector(".player-flex");
+    player.style.transform = "translateY(100%)";
+    player.style.transition = "transform 300ms ease-out";
+
+    setTimeout(()=>{
+      setPage("home")
+    }, 300);
+
   }
 
   const insideBody = (currentPage) =>{
     switch(currentPage)
     {
       case "home": 
-        return <HomePage audioPlay = {audioPlay} audioNext ={audioNext} audioPrev = {audioPrev} audioChange = {audioChange} openPlayer = {openPlayer}
-        playState = {playState} songs = {songs} songName = {songName} artist = {artist} songIcon = {songIcons} index = {index}/>
+        return ""
 
       case "player":
-        return <PlayerPage openHome = {openHome}/>
+        return <PlayerPage openHome = {openHome} songName = {songName} artist = {artist} songIcon = {songIcons} index = {index}
+        audioNext = {audioNext} audioPrev = {audioPrev} audioPlay = {audioPlay} playState = {playState}
+        audioLength = {audioLength} audioSeek = {audioSeek}/>
     }
   }
   return (
@@ -127,10 +145,8 @@ function App() {
       <audio id = "audio">
         <source src = {songs[index]}></source>
       </audio>
-      {/* <HomePage audioPlay = {audioPlay} audioNext ={audioNext} audioPrev = {audioPrev} audioChange = {audioChange} openPlayer = {openPlayer}
+      <HomePage audioPlay = {audioPlay} audioNext ={audioNext} audioPrev = {audioPrev} audioChange = {audioChange} openPlayer = {openPlayer}
       playState = {playState} songs = {songs} songName = {songName} artist = {artist} songIcon = {songIcons} index = {index}/>
-
-      <PlayerPage /> */}
 
       {insideBody(currentPage)};
     </div>

@@ -12,7 +12,21 @@ const HomePage = (props) =>{
     
     const fun = ()=>{
         let box = document.querySelector("#menuCheckBox")
-        // console.log(box)
+        let navBarContent = document.querySelector(".navBar-content")
+
+        if( navBarContent.style.display == "" ||  navBarContent.style.display == "none")
+            navBarContent.style.display = "flex";
+        else
+        {
+            navBarContent.classList.add("navBarOut");
+            
+            setTimeout(()=>{navBarContent.style.display = "none";navBarContent.classList.remove("navBarOut");}, 300)
+        }
+            
+
+    }
+    const visitGit = () =>{
+        window.location.href = "https://github.com/Nithesh24/music_player";
     }
     const playerState = () =>{
         let pauseBtn = document.querySelector(".pause");
@@ -28,6 +42,64 @@ const HomePage = (props) =>{
         pauseBtn.src = pause;
     }
 
+    //search bar functin;
+    const searchBarOnClick = ()=> {
+        let searchBar = document.querySelector(".searchBar");
+        let searchList = document.querySelector(".searchList");
+        searchList.style.display = "flex"
+        props.songName.map((i) =>{
+            let element = document.createElement("div");
+            element.innerHTML = i;
+            element.classList.add("search-item")
+            searchList.appendChild(element);
+            element.addEventListener("click" , (e) =>{
+                let index = props.songName.indexOf(e.target.innerHTML)
+                props.audioChange(index);
+            })
+        })
+
+        searchBar.addEventListener("keydown", (e) =>{
+
+            searchList = document.querySelector(".searchList");
+            let child = searchList.lastElementChild;
+            
+            while(child)
+            {
+                searchList.removeChild(child);
+                child = searchList.lastElementChild;
+            }
+            props.songName.map((i) =>{
+                let element = document.createElement("div");
+                
+                if((i.substr(0, e.target.value.length).toLowerCase()) == e.target.value)
+                {
+                    element.innerHTML = i;
+                    element.classList.add("search-item")
+                    searchList.appendChild(element);
+                    element.addEventListener("click" , (e) =>{
+                        let index = props.songName.indexOf(e.target.innerHTML)
+                        props.audioChange(index);
+                    })
+                }
+            })
+        }) 
+
+        
+    }
+
+    const hideSearchList = () =>{
+        setTimeout(()=>{
+            let searchList = document.querySelector(".searchList");
+        let child = searchList.lastElementChild;
+        
+        while(child)
+        {
+            searchList.removeChild(child);
+            child = searchList.lastElementChild;
+        }
+        searchList.style.display = "none"
+        }, 500)
+    }
     return(
         <div className = "home-flex">
             <div className = "navBar">
@@ -38,12 +110,19 @@ const HomePage = (props) =>{
                     <div className = "bar"></div>
                     <div className = "bar"></div>
                 </div>
-                <img src = {pfp} className = "profileIcon shadow"></img>
+                <img src = {pfp} className = "profileIcon shadow" onClick={visitGit}></img>
+                <div className = "navBar-content">
+                    This is 2nd task given by coding raja in our Internship program
+                    <br></br>
+                    <br></br>
+                    The music player made with react js. made from scratch.
+                </div>
             </div>
 
             <div id = "searchBar">
-                <input className = "searchBar shadow" type = "text" placeholder = "search your song.."></input>
+                <input className = "searchBar shadow" type = "text" placeholder = "search your song.." onClick = {searchBarOnClick} onBlur={hideSearchList}></input>
                 <img className = "searchIcon" src = {searchIcon}></img>
+                <div className = "searchList"></div>
             </div>
 
             <h1>Trending Songs</h1>

@@ -31,7 +31,9 @@ code {
 
   /* all bar heights : 7%; */
 }
-
+.body-container{
+  position: relative;
+}
 
 
 /* ************************************************HomePage css***************************************************** */
@@ -46,7 +48,6 @@ code {
   height : 100vh;
 
   background-color : var(--black);
-
 }
 
 .navBar{
@@ -63,6 +64,45 @@ code {
   overflow : visible;
 }
 
+.navBar-content{
+  display: none;
+  position: absolute;
+  top : 7%;
+  left : 0%;
+  width : 60%;
+  padding : 2em;
+  padding-left : 1em;
+  z-index: 1;
+  height: 100%;
+
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color : white;
+  font-size: 2em;
+
+  animation : navBarInAnimation 300ms ease-out 0ms;
+}
+@keyframes navBarInAnimation {
+  0%{
+    left : -100%;
+  }
+  100%{
+    left : 0%;
+  }
+}
+.navBarOut{
+  animation : navBarOutAnimation 300ms ease-out 0ms;
+
+}
+@keyframes navBarOutAnimation {
+  0%{
+    left : 0%;
+  }
+  100%{
+    left : -100%;
+  }
+}
 .menuBar{
   height : 80%;
   width : 13%;
@@ -168,6 +208,22 @@ code {
   right : 5%;
   bottom : 0%;
   border-radius : 0px 50% 50% 50%;
+}
+
+.searchList{
+  position : absolute;
+  height : auto;
+  width : 80%;
+  background-color: rgba(0, 0, 0, .7);
+  top : 100%;
+
+  display : none;
+  flex-direction: column;
+}
+.search-item{
+  padding : 1em 0;
+  padding-left : 5%;
+  color : white;
 }
 
 h1{
@@ -282,8 +338,10 @@ h1{
   background-color : var(--black);
   color : white;
 
-  position: relative;
-  animation: playerInAnimation 150ms ease-out 0ms;
+  position: absolute;
+  top : 0;
+  z-index : 1;
+  animation: playerInAnimation 300ms ease-out 0ms;
 }
 @keyframes playerInAnimation {
   0%{
@@ -292,6 +350,16 @@ h1{
   }  
   100%{
     transform: translateY(0%);
+    /* opacity: 1; */
+  }
+}
+@keyframes playerOutAnimation {
+  0%{
+    transform: translateY(0%);
+    /* opacity: 0; */
+  }  
+  100%{
+    transform: translateY(200%);
     /* opacity: 1; */
   }
 }
@@ -351,7 +419,7 @@ h1{
 }
 .progress-thumb{
   height : 100%;
-  width : calc(100% - (60/(100))*100%);
+  width : 0%;
   background-color : var(--red);
   border-radius : 20px;
 }
@@ -393,6 +461,12 @@ h1{
   border-radius : 50%;
 }
 
+
+
+.onActive:active{
+  opacity: .5;
+}
+
 /* ***********************************css for pc******************************************************* */
 
 @media screen and (min-width : 768px)
@@ -430,6 +504,9 @@ h1{
   height : 100%;
   width : 100%;
 }
-
+.player-flex{
+  height : 100%;
+  width : 100%;
+}
 
 }
