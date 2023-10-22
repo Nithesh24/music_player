@@ -19,6 +19,7 @@ code {
   padding : 0;
   margin : 0;
 
+  background-color: var(--black);
   overflow: hidden;
 }
 
@@ -192,6 +193,7 @@ h1{
   justify-content: space-evenly;
   height : 100%;
   min-width : 30%;
+  max-width : 30%;
   margin : 0 3%;
   color : white;
   overflow : visible;
@@ -216,14 +218,17 @@ h1{
   display : flex;
   flex-direction : row;
   align-items : center;
-  justify-content : space-evenly;
+  justify-content : flex-start;
 
   color : white;
+  border-radius : 50px;
 }
 .playerIcon{
   aspect-ratio : 1/1;
   height: 80%;
   border-radius : 50%;
+  margin-left : 7%;
+  margin-right : 5%;
 }
 .playerOptions{
   width : 25%;
@@ -235,6 +240,8 @@ h1{
   align-items : center;
 
   overflow : visible;
+  margin-left : auto;
+  margin-right: 7%;
 }
 .backward{
   aspect-ratio : 1/1;
@@ -251,6 +258,141 @@ h1{
   aspect-ratio : 1/1;
   width: 20%;
 }
+.forward:active{
+  opacity : .5;
+}
+.pause:active{
+  opacity : .5;
+}
+.backward:active{
+  opacity : .5;
+}
+
+
+
+
+/* *************************************player page css**************************************************** */
+
+.player-flex{
+  display : flex;
+  flex-direction : column;
+  justify-content : space-evenly;
+  height : 100vh;
+  width : 100vw;
+  background-color : var(--black);
+  color : white;
+
+  position: relative;
+  animation: playerInAnimation 150ms ease-out 0ms;
+}
+@keyframes playerInAnimation {
+  0%{
+    transform: translateY(100%);
+    /* opacity: 0; */
+  }  
+  100%{
+    transform: translateY(0%);
+    /* opacity: 1; */
+  }
+}
+
+.player-navBar{
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
+  align-items : center;
+  height: 7%;
+  width : 90%;
+  margin : 0 auto;
+
+  overflow : visible;
+}
+
+.player-navBar img{
+  aspect-ratio : 1/1;
+  height: 60%;
+  border-radius : 50%;
+  object-fit : contain;
+}
+
+.player-info{
+  display : flex;
+  flex-direction : column;
+  justify-content : flex-start;
+  align-items : center;
+
+  height : 40%;
+  overflow : visible;
+}
+.player-info img{
+  aspect-ratio: 1/1;
+  width : 70%;
+  border-radius : 50%;
+  margin-bottom : auto;
+}
+
+.player-progress{
+  width : 90%;
+  margin : 0 auto;
+  overflow : visible;
+  padding : 1em 0;
+}
+.progress-bar{
+  width : 90%;
+  height: 10px;
+  border-radius : 20px;
+
+  display  : flex;
+  flex-direction : row;
+  justify-content : flex-start;
+  align-items: center;
+  overflow : visible;
+  margin : 0 auto;
+}
+.progress-thumb{
+  height : 100%;
+  width : calc(100% - (60/(100))*100%);
+  background-color : var(--red);
+  border-radius : 20px;
+}
+.progress-dot{
+  display : block;
+  height: 100%;
+  aspect-ratio: 1/1;
+  background-color: var(--red);
+  border : solid 3px var(--black);
+  border-radius: 50%;
+}
+.player-progress div:last-child{
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
+}
+
+
+.player-playerOptions{
+  height: 10%;
+  overflow : visible;
+  display : flex;
+  align-items : center;
+}
+.player-playerOptions > .playerOptions{
+  width : 50%;
+  margin : 0 auto;
+}
+
+.player-extraOptions{
+  height : 10%;
+  display : flex;
+  justify-content: space-evenly;
+  align-items : center;
+}
+.player-extraOptions img{
+  height: 50%;
+  aspect-ratio: 1/1;
+  border-radius : 50%;
+}
+
 /* ***********************************css for pc******************************************************* */
 
 @media screen and (min-width : 768px)
@@ -259,6 +401,20 @@ h1{
 *{
   overflow : hidden;
 }
+
+::-webkit-scrollbar-track
+{
+	background-color: transparent;
+  max-width : 12px;
+}
+
+::-webkit-scrollbar
+{
+  height: 10px;
+	background-color:  transparent;
+}
+
+
 
 
 .body-container{
@@ -274,4 +430,6 @@ h1{
   height : 100%;
   width : 100%;
 }
+
+
 }

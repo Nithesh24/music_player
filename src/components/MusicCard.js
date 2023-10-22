@@ -4,7 +4,7 @@ const MusicCard = (props) =>{
 
     return(
         <div className = "musicCard">
-            <img className = "musicIcon shadow" src = {props.icon}></img>
+            <img className = "musicIcon shadow" src = {props.icon} onClick={props.onClick_fun}></img>
             <h3 className = "musicName">{props.name}</h3>
             <h3 className = "musicArtist">{props.artist}</h3>
         </div>
